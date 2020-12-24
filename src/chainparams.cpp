@@ -51,7 +51,7 @@ public:
         pchMessageStart[1] = 0x2d;
         pchMessageStart[2] = 0x43;
         pchMessageStart[3] = 0xf3;
-        vAlertPubKey = ParseHex("047fa7e48a9852045a59a39ebc35bf9428ff739409808443e63e2e8341a5833f988b386a523bcb23276852b42f8f99b1da994212127de511a24bdf73b39b3a2861");
+        vAlertPubKey = ParseHex("04bf1c0874e989ca090e7eb5d5dd8a04224f2db5cc80d28a256ee676a33396f21622aacb06a9159eaf02ada44238f935f12dd35dad2f6f9075e325ee1219c88533");
 
         nDefaultPort = 15814;
         nRPCPort = 15815;
@@ -85,8 +85,10 @@ public:
 
 #ifdef         OPEN_PROTOCOL_V4
         vSeeds.push_back(CDNSSeedData("dnsseed-cn", "dnsseeder.whitecoin.in"));
-#endif
+#else
         vSeeds.push_back(CDNSSeedData("dnsseed-en", "dnsseeder1.whitecoin.in"));
+#endif
+
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 73);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 87);
@@ -183,10 +185,6 @@ public:
         vFixedSeeds.clear();
         vSeeds.clear();
         vSeeds.push_back(CDNSSeedData("dnsseed", "dnsseedtest.xwccore.com"));
-        vSeeds.push_back(CDNSSeedData("seed1", "112.126.86.246"));
-        vSeeds.push_back(CDNSSeedData("seed2", "101.201.37.171"));
-        vSeeds.push_back(CDNSSeedData("seed3", "112.126.86.246"));
-        vSeeds.push_back(CDNSSeedData("seed3", "39.107.66.180"));
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 111);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 196);
@@ -270,7 +268,7 @@ void SelectParams(CChainParams::Network network) {
 
 bool SelectParamsFromCommandLine() {
     bool fRegTest = GetBoolArg("-regtest", false);
-    bool fTestNet = GetBoolArg("-testnet", true);
+    bool fTestNet = GetBoolArg("-testnet", false);
 
     if (fTestNet && fRegTest) {
         return false;
