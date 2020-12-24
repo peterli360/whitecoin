@@ -444,6 +444,10 @@ void CAddrMan::GetAddr_(std::vector<CAddress> &vAddr)
     if (nNodes > ADDRMAN_GETADDR_MAX)
         nNodes = ADDRMAN_GETADDR_MAX;
 
+    if( nNodes < ADDRMAN_GETADDR_MIN)
+        nNodes = ADDRMAN_GETADDR_MIN;
+
+
     // gather a list of random nodes, skipping those of low quality
     for (unsigned int n = 0; n < vRandom.size(); n++)
     {

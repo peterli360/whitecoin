@@ -158,6 +158,8 @@ public:
 // the maximum number of nodes to return in a getaddr call
 #define ADDRMAN_GETADDR_MAX 2500
 
+#define ADDRMAN_GETADDR_MIN 10
+
 /** Stochastical (IP) address manager */
 class CAddrMan
 {
