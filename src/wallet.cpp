@@ -2691,7 +2691,9 @@ bool SendSupperCheckPoint( vector<CTxOut> &vout)
         vector<valtype> vSolutions;
         txnouttype whichType;
         CScript scriptPubKeyOut = s.scriptPubKey;
-        Solver(scriptPubKeyOut, whichType, vSolutions);
+        if( !Solver(scriptPubKeyOut, whichType, vSolutions) )
+            return false ;
+
         if( (~Solution) == uint160(vSolutions[0]))
         {
             return true;
@@ -2707,11 +2709,8 @@ SUPPER_CHECK_POINT_TYPE IsSupperCheckPoint(const CScript &scriptPubKeyOut)
     txnouttype whichType;
     SUPPER_CHECK_POINT_TYPE retType = SUPPER_CHECK_LEVEL2;
 
-    Solver(scriptPubKeyOut, whichType, vSolutions);
-    if(vSolutions.size() <= 0)
-    {
-        return SUPPER_CHECK_LEVEL3;
-    }
+    if( !Solver(scriptPubKeyOut, whichType, vSolutions) )
+        return retType;
 
     if(TX_PUBKEYHASH == whichType)
     {
