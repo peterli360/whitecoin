@@ -341,10 +341,6 @@ bool AppInit2(boost::thread_group& threadGroup)
 
     nDerivationMethodIndex = 0;
 
-    if (!SelectParamsFromCommandLine()) {
-        return InitError("Invalid combination of -testnet and -regtest.");
-    }
-
     if (mapArgs.count("-bind")) {
         // when specifying an explicit binding address, you want to listen on it
         // even when -connect or -proxy is specified
@@ -452,6 +448,10 @@ bool AppInit2(boost::thread_group& threadGroup)
     // Sanity check
     if (!InitSanityCheck())
         return InitError(_("Initialization sanity check failed. Whitecoin is shutting down."));
+
+    if (!SelectParamsFromCommandLine()) {
+        return InitError("Invalid combination of -testnet and -regtest.");
+    }
 
     std::string strDataDir = GetDataDir().string();
 #ifdef ENABLE_WALLET
